@@ -1,0 +1,35 @@
+// json2html.js
+export default function json2html(data) {
+    // Extract unique keys for the table header
+    const headers = [...new Set(data.flatMap(Object.keys))];
+  
+    // Generate the table header
+    const thead = `
+      <thead>
+        <tr>${headers.map((header) => `<th>${header}</th>`).join('')}</tr>
+      </thead>
+    `;
+  
+    // Generate the table body
+    const tbody = `
+      <tbody>
+        ${data
+          .map(
+            (row) =>
+              `<tr>${headers
+                .map((header) => `<td>${row[header] || ''}</td>`)
+                .join('')}</tr>`
+          )
+          .join('')}
+      </tbody>
+    `;
+  
+    // Combine all parts into the full table
+    return `
+      <table data-user="gowtham.ponna2005@gmail.com">
+        ${thead}
+        ${tbody}
+      </table>
+    `;
+  }
+  
